@@ -1,10 +1,10 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 
 export default function RevuHero() {
-  // Animation Variants
-  const containerVars = {
+  // 1. Added explicit "Variants" type to the objects
+  const containerVars: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -12,12 +12,16 @@ export default function RevuHero() {
     }
   };
 
-  const itemVars = {
+  const itemVars: Variants = {
     hidden: { y: 40, opacity: 0 },
     visible: { 
       y: 0, 
       opacity: 1, 
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { 
+        duration: 0.8, 
+        // 2. Added "as const" to fix the Bezier Array error
+        ease: [0.16, 1, 0.3, 1] as const 
+      } 
     }
   };
 
@@ -62,7 +66,7 @@ export default function RevuHero() {
 
         {/* CTA Section */}
         <motion.div variants={itemVars} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button className="group relative px-12 py-6 bg-[#66D154] rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_50px_rgba(102,209,84,0.2)]">
+          <button className="group relative px-12 py-6 bg-[#66D154] rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_50px_rgba(102,209,84,0.25)]">
             <span className="relative z-10 text-black font-black uppercase tracking-widest text-xs flex items-center gap-2">
               Get Started <ArrowRight size={16} />
             </span>
